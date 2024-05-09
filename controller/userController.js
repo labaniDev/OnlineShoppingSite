@@ -49,7 +49,20 @@ login : async (req,res) =>{
         console.log(error);
         return res.status(500).send('Internal Server Error')
     }
-}   
+} ,
+getAllUsers: async(req,res) =>{
+    try{
+        const users = await  userModel.find();
+        if (!users || users.length === 0) {
+            return res.status(404).send('No users found');
+        }
+
+        return res.status(200).json(users);
+    }catch(error){
+        console.log(error);
+        return res.status(500).send('Internal Server Error');
+    }
+}  
 }
 
 module.exports = userController;

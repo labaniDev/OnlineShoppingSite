@@ -18,6 +18,7 @@ AppRouter.get('/getAllCategory',categoryController.getAllCategory);
 //product Controller
 AppRouter.post('/addProduct/:categoryId', productController.addProduct);
 AppRouter.get('/getProductByCategoryId/:categoryId',productController.getProductByCategoryId);
+AppRouter.get('/getProductByproductId/:productId',productController.getProductByProductId);
 
 
 

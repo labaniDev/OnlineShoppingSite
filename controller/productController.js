@@ -48,6 +48,20 @@ getProductByCategoryId : async(req,res) =>{
         console.log(error);
         res.status(500).send('Internal Server Error');
     }
+},
+getProductByProductId : async(req,res)=>{
+    try{
+        const productId = req.params.productId;
+        const product = await productModel.findById({_id:productId});
+        if(!product){
+            res.status(404).send('Product not found');
+        }
+        res.status(200).send(product);
+
+    }catch(error){
+        console.log(error);
+        return res.status(500).send('Internal Server Error');
+    }
 }  
 }
 

@@ -62,7 +62,21 @@ getProductByProductId : async(req,res)=>{
         console.log(error);
         return res.status(500).send('Internal Server Error');
     }
-}  
+} ,
+getProductByProductName : async(req,res) =>{
+    try{
+        const {name} = req.params;
+        const products = await productModel.find({ name: { $regex: new RegExp(name, 'i') } });
+
+        if(products.length ===0){
+            res.status(404).send('Product Not Found');
+        }
+        res.status(200).send(products);
+    }catch(error){
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+} 
 }
 
 module.exports = productController;

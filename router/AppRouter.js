@@ -24,6 +24,7 @@ AppRouter.get('/getProductByproductName/:name',productController.getProductByPro
 
 //cartController
 AppRouter.post('/addToCart/:userId',cartController.addToCart);
+AppRouter.get('/getCartItems/:userId',cartController.getCartItems);
 
 
 module.exports = AppRouter;

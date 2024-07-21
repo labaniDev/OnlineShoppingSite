@@ -1,5 +1,5 @@
 const {response} = require('express');
-const cartModel = require('../model/cart');
+const cartModel = require('../model/cart.js');
 const productModel = require('../model/product');
 const userModel = require('../model/user');
 
@@ -51,7 +51,29 @@ addToCart : async(req,res)=>{
         return res.status(500).send('Internal Server Error');
     }
 
-} 
+} ,
+getCartItems : async(req,res) => {
+    try {
+        const { userId } = req.params;
+
+        // Ensure the user exists
+        const user = await userModel.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Fetch all cart items for the user and populate the product details
+        let cartItems = await cartModel.find({ user: userId }).populate('products');
+
+        // Filter out cart items with quantity 0
+        //cartItems = cartItems.filter(item => item.quantity > 0);
+
+        res.status(200).json(cartItems);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+}
 }   
 
 module.exports = cartController;

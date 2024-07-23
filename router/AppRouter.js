@@ -6,6 +6,7 @@ const categoryController = require('../controller/categoryController');
 const productController = require('../controller/productController');
 const cartController = require('../controller/cartController');
 const driverController = require('../controller/driverController');
+const serviceController = require('../controller/servicesController');
 const verifyToken=require("../middleware/auth.js");
 
 
@@ -30,4 +31,11 @@ AppRouter.get('/getCartItems/:userId',cartController.getCartItems);
 //driverController
 AppRouter.post('/addDriver',driverController.addDriver);
 AppRouter.get('/getDriver',driverController.getDriver);
+
+//servicesController
+AppRouter.post('/addServices',serviceController.addServices);
+
+
+
+
 module.exports = AppRouter;

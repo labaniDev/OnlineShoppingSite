@@ -65,9 +65,6 @@ getCartItems : async(req,res) => {
         // Fetch all cart items for the user and populate the product details
         let cartItems = await cartModel.find({ user: userId }).populate('products');
 
-        // Filter out cart items with quantity 0
-        //cartItems = cartItems.filter(item => item.quantity > 0);
-
         res.status(200).json(cartItems);
     } catch (error) {
         console.error(error);

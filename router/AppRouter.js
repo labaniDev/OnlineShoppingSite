@@ -5,6 +5,7 @@ const userController = require('../controller/userController');
 const categoryController = require('../controller/categoryController');
 const productController = require('../controller/productController');
 const cartController = require('../controller/cartController');
+const driverController = require('../controller/driverController');
 const verifyToken=require("../middleware/auth.js");
 
 
@@ -26,5 +27,7 @@ AppRouter.get('/getProductByproductName/:name',productController.getProductByPro
 AppRouter.post('/addToCart/:userId',cartController.addToCart);
 AppRouter.get('/getCartItems/:userId',cartController.getCartItems);
 
-
+//driverController
+AppRouter.post('/addDriver',driverController.addDriver);
+AppRouter.get('/getDriver',driverController.getDriver);
 module.exports = AppRouter;

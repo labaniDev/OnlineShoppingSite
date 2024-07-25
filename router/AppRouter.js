@@ -28,6 +28,7 @@ AppRouter.get('/getProductByproductName/:name',productController.getProductByPro
 //cartController
 AppRouter.post('/addToCart/:userId',cartController.addToCart);
 AppRouter.get('/getCartItems/:userId',cartController.getCartItems);
+AppRouter.post('/deleteCartItems/:userId/:productId',cartController.deleteProductFromCart);
 
 //driverController
 AppRouter.post('/addDriver',driverController.addDriver);

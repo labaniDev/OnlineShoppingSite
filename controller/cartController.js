@@ -70,6 +70,28 @@ getCartItems : async(req,res) => {
         console.error(error);
         res.status(500).json({ message: 'Internal Server Error' });
     }
+},
+deleteProductFromCart : async(req,res)=>{
+    try{
+        const{userId,productId} = req.params;
+        if(!userId && !productId){
+            return res.status(404).send('Please give userId and productId');
+        }
+        const user = await userModel.findById(userId);
+        if(!user){
+            return res.status(404).send('User Not Found');
+        }
+        const result = await cartModel.findOneAndDelete({user : userId,products : productId});
+
+        if(!result){
+            return res.status(404).send('Product is not found in the cart');
+        }
+        return res.status(200).send('Product Removed From the Cart');
+
+    }catch(error){
+        console.log(error);
+        return res.status(500).send('Internal Server Error');
+    }
 }
 }   
 

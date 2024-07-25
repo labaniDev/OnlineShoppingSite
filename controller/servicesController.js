@@ -17,6 +17,16 @@ addServices : async(req,res)=>{
         console.log(error);
         return res.status(500).send('Internal Server Error');
     }
-}    
+} ,
+getServices : async(req,res) =>{
+    try{
+        const services = await serviceModel.find();
+        return res.status(200).send(services);
+
+    }catch(error){
+        console.log(error);
+        return res.status(500).send('Internal Server Error');
+    }
+}   
 }
 module.exports = serviceController;

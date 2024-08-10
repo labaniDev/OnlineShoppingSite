@@ -47,6 +47,7 @@ AppRouter.post('/addOrder',orderController.calculateTotalPrice);
 AppRouter.post('/orderRecieved',orderController.orderRecieved);
 AppRouter.get('/getOrder/:userId',orderController.getOrders);
 AppRouter.post('/cancelOrder',orderController.cancelOrder);
+AppRouter.get('/getCancelOrder',orderController.getCancelOrder);
 
 
 

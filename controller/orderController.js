@@ -138,6 +138,25 @@
         console.log(error);
         return res.status(500).send('Internal Server Error');
     }
+ },
+
+ getCancelOrder:async(req,res)=>{
+    try{
+        const {userId}=req.body;
+        if(!userId){
+            return res.status(400).send('UserId is Required');
+        }
+        const user = await userModel.findById(userId);
+        if(!user){
+            return req.status(404).send('User Not found');
+        }
+        const orders = await orderModel.find({userId:userId,status:'cancelled'});
+        return res.status(200).send(orders);
+
+    }catch(error){
+        console.log(error);
+        return res.status(500).send('Internal Server Error');
+    }
  }
 
 

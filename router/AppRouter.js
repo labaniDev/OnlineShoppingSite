@@ -8,6 +8,7 @@ const cartController = require('../controller/cartController');
 const driverController = require('../controller/driverController');
 const serviceController = require('../controller/servicesController');
 const contactController = require('../controller/contactController');
+const orderController = require('../controller/orderController');
 const verifyToken=require("../middleware/auth.js");
 
 
@@ -41,6 +42,8 @@ AppRouter.get('/getServices',serviceController.getServices);
 //contactusController
 AppRouter.post('/addContactus',contactController.saveContactUs);
 
+//orderController
+AppRouter.post('/addOrder',orderController.calculateTotalPrice);
 
 
 

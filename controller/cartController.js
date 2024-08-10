@@ -75,7 +75,7 @@ deleteProductFromCart : async(req,res)=>{
     try{
         const{userId,productId} = req.params;
         if(!userId && !productId){
-            return res.status(404).send('Please give userId and productId');
+            return res.status(404).send('Please give userId and productId');    
         }
         const user = await userModel.findById(userId);
         if(!user){

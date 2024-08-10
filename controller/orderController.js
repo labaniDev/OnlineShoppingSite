@@ -94,6 +94,24 @@
         console.log(error);
         return res.status(500).send('Internal Server Error');
     }
+ },
+ getOrders:async(req,res)=>{
+    try{
+        const userId = req.params.userId;
+        if(!userId){
+            return res.status(400).send('UserId is required');
+        }
+        const user = await userModel.findById(userId);
+        if(!user){
+            return res.status(404).send('user not found');
+        }
+        const orders = await orderModel.find({userId:userId,status:'placed'});
+        return res.status(200).send(orders);
+
+    }catch(error){
+        console.log(error);
+        return res.status(500).send('Internal Server Error');
+    }
  }
 
 

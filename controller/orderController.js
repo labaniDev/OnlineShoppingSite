@@ -112,6 +112,32 @@
         console.log(error);
         return res.status(500).send('Internal Server Error');
     }
+ },
+ cancelOrder:async(req,res)=>{
+    try{
+        const {userId}=req.body;
+        const user = await userModel.findById(userId);
+        if(!user){
+            return res.status(404).send('User Not Found');
+        }
+        const placedOrder = await orderModel.findOne({userId:userId,status:'placed'});
+        if(!placedOrder){
+            return res.status(400).send('You have no placed Order');
+        }
+        const updateOrder = await orderModel.findByIdAndUpdate(
+            {_id:placedOrder._id},
+            {$set:{status:'cancelled'}},
+            {new:true}
+        )
+        if(!updateOrder){
+            return res.status(404).send('Order not found or already cancelled');
+        }
+        return res.status(200).send('Order Cancelled Succesfully');
+
+    }catch(error){
+        console.log(error);
+        return res.status(500).send('Internal Server Error');
+    }
  }
 
 

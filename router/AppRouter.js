@@ -44,6 +44,7 @@ AppRouter.post('/addContactus',contactController.saveContactUs);
 
 //orderController
 AppRouter.post('/addOrder',orderController.calculateTotalPrice);
+AppRouter.post('/orderRecieved',orderController.orderRecieved);
 
 
 

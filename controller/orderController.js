@@ -66,7 +66,36 @@
         console.log(error);
         return res.status(500).send('Internal Server Error');
     }
- }   
+ } ,
+ orderRecieved:async(req,res)=>{
+    try{
+        const {userId}=req.body;
+        const user=await userModel.findById(userId);
+        if(!user){
+            return res.status(404).send('User Not Found');
+        }
+        const pendingOrder=await orderModel.findOne({userId:userId,status:'pending'});
+        if(!pendingOrder){
+            return res.status(404).send('Pending order not found');
+        }
+        const updateOrder=await orderModel.findByIdAndUpdate(
+            {_id:pendingOrder._id},
+            {$set:{status:'placed'}},
+            {new:true}
+        
+        );
+        if(!updateOrder){
+            return res.status(404).send('Order not found or already Processed');
+        }
+        await cartModel.deleteMany({user:userId});
+        return res.status(200).send('Order Recieved Successfully');
+
+    }catch(error){
+        console.log(error);
+        return res.status(500).send('Internal Server Error');
+    }
+ }
+
 
 
 }
